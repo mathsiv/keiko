@@ -3,7 +3,7 @@ import styles from "./Home.module.css"
 
 export const Home = () => {
   return (
-    <div>
+    <>
     <div>Bienvenue sur ton futur pokédex !</div>
     <div>
       Tu vas pouvoir apprendre tout ce qu'il faut sur React, Redux et Symfony, et attraper des
@@ -15,6 +15,6 @@ export const Home = () => {
     <p>Name: Carapuce</p>
     <p> Number: 7</p>
     </div>
-    </div>
+    </>
   );
   }
