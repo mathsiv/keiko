@@ -1,6 +1,21 @@
 import styles from "./Home.module.css";
 import {Pokemon} from 'components/Pokemon';
 
+const pokemonList = [
+  {
+    name: 'Carapuce',
+    id: 7,
+  },
+  {
+    name: 'Carabaffe',
+    id: 8,
+  },
+  {
+    name: 'Tortank',
+    id: 9,
+  },
+];
+
 
 export const Home = () => {
   return (
@@ -12,9 +27,9 @@ export const Home = () => {
     </div>
     <div>Commence par créer ton premier pokemon: </div>
     <div> 
-    <Pokemon name= "Tortank" id = "7"/>
-    <Pokemon name= "Carabaffe" id = "8"/>
-    <Pokemon name= "Tortank" id = "9"/>
+    {pokemonList.map(({name, id}) => {
+  return <Pokemon name={name} id={id} />
+})}
     </div>
     </div>
   );

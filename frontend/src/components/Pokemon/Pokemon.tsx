@@ -1,10 +1,13 @@
 interface Props {
     name: string
-    id: string
+    id: number
 } 
 
 export const Pokemon = ({name, id}: Props) => {
     let img: string = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
+
+    console.log(name)
+
     return(
     <>
     <img src = {img} alt = {name}/> 
