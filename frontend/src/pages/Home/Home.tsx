@@ -1,21 +1,7 @@
 import styles from "./Home.module.css";
 import React, {useState, useEffect} from "react";
 import {Pokemon} from 'components/Pokemon';
-
-const pokemonList = [
-  {
-    name: 'Carapuce',
-    id: 7,
-  },
-  {
-    name: 'Carabaffe',
-    id: 8,
-  },
-  {
-    name: 'Tortank',
-    id: 9,
-  },
-];
+import { Loader } from "components/Loader/Loader";
 
 interface PokemonInfo {
   id: number
@@ -26,16 +12,27 @@ interface PokemonInfo {
 
 export const Home = () => {
 
-    const [pokemonList, updatePokemonList] = React.useState<PokemonInfo[]>([])
-    const [filterValue, setFilterValue] = React.useState('');
+  const [isLoading, setLoading] = useState(true)
+  const [pokemonList, updatePokemonList] = useState<PokemonInfo[]>([])
+  const [filterValue, setFilterValue] = useState('');
+  const [isError, setError] = useState(false)
 
   async function fetchPokemons () {
     const response = await fetch('http://localhost:8000/pokemons', { headers: { accept: "application/json" } })
     const responseJSON = await response.json()
+    setLoading(false)
     return responseJSON
     }
 
-  useEffect(() => {fetchPokemons().then(pokemonData => updatePokemonList(pokemonData))})
+  useEffect(() => {
+    fetchPokemons()
+    .then(pokemonData => updatePokemonList(pokemonData))
+    .catch(() => {
+      console.log("error! Request failed")
+      setError(true)
+    })
+  }
+    )
 
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFilterValue(event.target.value)
@@ -60,11 +57,16 @@ export const Home = () => {
     <label> Search pokemons:
     <input className={styles.input} onChange={onInputChange} value={filterValue} />
     </label>
+    {isError ? 
+    (<div className={styles.errorText}> Sorry, we couldn't get to your pokemons... </div>)
+    : isLoading ? (<div className={styles.loader}>
+      <Loader/>
+    </div>):(
     <div className={styles.box}> 
     {filterPokemonsByName(pokemonList, filterValue).map(({name, id, height, weight}) => {
   return <Pokemon name={name} id={id} height={height} weight={weight} key={id}/>
 })}
-    </div>
+    </div>)}
     </div>
   );
   }
