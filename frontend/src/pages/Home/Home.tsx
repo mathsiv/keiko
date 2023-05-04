@@ -30,13 +30,11 @@ export const Home = () => {
     const [filterValue, setFilterValue] = React.useState('');
 
   function fetchPokemons () {
-    fetch('http://localhost:8000/pokemons', { headers: { accept: "application/json" } })
-      .then(response => response.json())
-      .then(PokemonData => console.log(PokemonData));}
+    return fetch('http://localhost:8000/pokemons', { headers: { accept: "application/json" } })
+      .then(response => response.json())    
+    }
 
-  useEffect(() => fetchPokemons())
-  //updatePokemonList(pokemonData)
-
+  useEffect(() => {fetchPokemons().then(pokemonData => updatePokemonList(pokemonData))})
 
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFilterValue(event.target.value)
