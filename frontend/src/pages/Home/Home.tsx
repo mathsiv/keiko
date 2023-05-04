@@ -1,4 +1,5 @@
 import styles from "./Home.module.css";
+import React, {useState, useEffect} from "react";
 import {Pokemon} from 'components/Pokemon';
 
 const pokemonList = [
@@ -16,19 +17,49 @@ const pokemonList = [
   },
 ];
 
+interface PokemonInfo {
+  id: number
+  name: string
+  height: number
+  weight: number
+}
 
 export const Home = () => {
+
+    const [pokemonList, updatePokemonList] = React.useState<PokemonInfo[]>([])
+    const [filterValue, setFilterValue] = React.useState('');
+
+  function fetchPokemons () {
+    fetch('http://localhost:8000/pokemons', { headers: { accept: "application/json" } })
+      .then(response => response.json())
+      .then(PokemonData => console.log(PokemonData));}
+
+  useEffect(() => fetchPokemons())
+  //updatePokemonList(pokemonData)
+
+
+  const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFilterValue(event.target.value)
+  };
+
+  interface Pokemon {
+    name: string
+    id: number
+  }
+  
+  function filterPokemonsByName(pokemons: Pokemon[], filter: string) {
+    const filteredList = pokemons.filter(pkm => (pkm.name).toLowerCase().includes(filter))
+    return filteredList
+  }
+  
   return (
     <div className={styles.intro}>
-    <div>Bienvenue sur ton futur pokédex !</div>
-    <div>
-      Tu vas pouvoir apprendre tout ce qu'il faut sur React, Redux et Symfony, et attraper des
-      pokemons !
-    </div>
-    <div>Commence par créer ton premier pokemon: </div>
+    <label> Search pokemons !
+    <input className={styles.input} onChange={onInputChange} value={filterValue} />
+    </label>
     <div> 
-    {pokemonList.map(({name, id}) => {
-  return <Pokemon name={name} id={id} />
+    {filterPokemonsByName(pokemonList, filterValue).map(({name, id}) => {
+  return <Pokemon name={name} id={id} key={id} />
 })}
     </div>
     </div>
