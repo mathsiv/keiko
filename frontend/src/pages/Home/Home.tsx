@@ -29,9 +29,10 @@ export const Home = () => {
     const [pokemonList, updatePokemonList] = React.useState<PokemonInfo[]>([])
     const [filterValue, setFilterValue] = React.useState('');
 
-  function fetchPokemons () {
-    return fetch('http://localhost:8000/pokemons', { headers: { accept: "application/json" } })
-      .then(response => response.json())    
+  async function fetchPokemons () {
+    const response = await fetch('http://localhost:8000/pokemons', { headers: { accept: "application/json" } })
+    const responseJSON = await response.json()
+    return responseJSON
     }
 
   useEffect(() => {fetchPokemons().then(pokemonData => updatePokemonList(pokemonData))})
