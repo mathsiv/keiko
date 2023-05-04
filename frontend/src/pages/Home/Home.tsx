@@ -44,6 +44,9 @@ export const Home = () => {
   interface Pokemon {
     name: string
     id: number
+    height: number
+    weight: number
+
   }
   
   function filterPokemonsByName(pokemons: Pokemon[], filter: string) {
@@ -53,12 +56,13 @@ export const Home = () => {
   
   return (
     <div className={styles.intro}>
-    <label> Search pokemons !
+    <div className={styles.text}>Pokedex !</div>
+    <label> Search pokemons:
     <input className={styles.input} onChange={onInputChange} value={filterValue} />
     </label>
-    <div> 
-    {filterPokemonsByName(pokemonList, filterValue).map(({name, id}) => {
-  return <Pokemon name={name} id={id} key={id} />
+    <div className={styles.box}> 
+    {filterPokemonsByName(pokemonList, filterValue).map(({name, id, height, weight}) => {
+  return <Pokemon name={name} id={id} height={height} weight={weight} key={id}/>
 })}
     </div>
     </div>
