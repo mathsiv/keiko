@@ -1,9 +1,14 @@
 .box {
-    border-style: double;
-    margin: 20px;
-    text-align: center;
-    padding: 20px;
-    border-width: 5px;
-    width: 300px;
-    height: 200px
+  border-style: double;
+  margin: 20px;
+  text-align: center;
+  padding: 20px;
+  border-width: 5px;
+  width: 300px;
+  height: 200px;
+}
+
+.name {
+  font-size: 20px;
+  margin-bottom: 5px;
 }
