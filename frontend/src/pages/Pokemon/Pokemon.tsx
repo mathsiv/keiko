@@ -14,8 +14,8 @@ interface PokemonInfo {
   }
 
 export const Pokemon = () => {
-  //let { id } = useParams();
-  let id = 1
+  let { id } = useParams();
+  //let id = 1
 
   const [isLoading, setLoading] = useState(true)
   const [isError, setError] = useState(false)
@@ -24,13 +24,13 @@ export const Pokemon = () => {
   async function fetchOnePokemon () {
     const response = await fetch(`http://localhost:8000/pokemon/${id}`, { headers: { accept: "application/json" } })
     const responseJSON = await response.json()
-    setLoading(false)
     return responseJSON
     }
 
   useEffect(() => {
     fetchOnePokemon()
     .then(pokemonData => updatePokemonInfo(pokemonData))
+    .then(() => setLoading(false))
     .catch(() => {
       console.log("error! Request failed")
       setError(true)

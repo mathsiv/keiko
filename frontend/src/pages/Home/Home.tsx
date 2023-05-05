@@ -1,5 +1,7 @@
 import styles from "./Home.module.css";
 import React, {useState, useEffect} from "react";
+
+
 import { Pokemon } from 'components/Pokemon';
 import { Loader } from "components/Loader/Loader";
 
@@ -64,7 +66,7 @@ export const Home = () => {
     </div>):(
     <div className={styles.box}> 
     {filterPokemonsByName(pokemonList, filterValue).map(({name, id, height, weight}) => {
-  return <Pokemon name={name} id={id} height={height} weight={weight} key={id}/>
+  return <Pokemon name={name} id={id} height={height} weight={weight} key={id}/> 
 })}
     </div>)}
     </div>
