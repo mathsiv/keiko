@@ -1,6 +1,6 @@
 import styles from "./Home.module.css";
 import React, {useState, useEffect} from "react";
-import {Pokemon} from 'components/Pokemon';
+import { Pokemon } from 'components/Pokemon';
 import { Loader } from "components/Loader/Loader";
 
 interface PokemonInfo {

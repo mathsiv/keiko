@@ -1,0 +1,25 @@
+.box {
+  margin: 100px;
+  display: block;
+  justify-content: center;
+  border-style: double;
+  padding: 20px;
+  border-width: 5px;
+}
+
+.name {
+  font-size: 25px;
+  text-align: center;
+}
+
+.p {
+  width: 250px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.img {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
